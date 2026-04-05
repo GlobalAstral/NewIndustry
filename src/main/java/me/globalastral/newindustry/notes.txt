@@ -1,0 +1,6 @@
+Coal Coke + Iron -> Industrial Steel 	| α = 0.0035, R0 = 0.85
+Charcoal + Iron -> Refined Steel 	| α = 0.0045, R0 = 1.00
+Coal + Iron -> Crude Steel 		| α = 0.0060, R0 = 1.20
+
+Heat system:
+	R(T) = R0 ( 1 + α(T - T0) )
