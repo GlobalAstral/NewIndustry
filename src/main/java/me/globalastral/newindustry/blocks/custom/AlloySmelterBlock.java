@@ -7,6 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -47,13 +48,28 @@ public class AlloySmelterBlock extends AbstractMachineBlock<AlloySmelterBlockEnt
         if (!pState.getValue(HAS_PORTS) && stack.is(Items.IRON_INGOT)) {
             stack.shrink(1);
             pLevel.setBlock(pPos, pState.setValue(HAS_PORTS, true), 11);
+            return InteractionResult.SUCCESS;
         } else if (pState.getValue(HAS_PORTS) && pLevel.getBlockEntity(pPos) instanceof AlloySmelterBlockEntity entity) {
             NetworkHooks.openScreen((ServerPlayer) pPlayer, entity, pPos);
-        } else {
-            return InteractionResult.PASS;
+            return InteractionResult.SUCCESS;
         }
-
         return InteractionResult.PASS;
+    }
+
+    @Override
+    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
+        super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
+        if (pState.getValue(HAS_PORTS)) {
+            ItemStack stack = new ItemStack(Items.IRON_INGOT, 1);
+            ItemEntity entity = new ItemEntity(
+                    pLevel,
+                    pPos.getX(),
+                    pPos.getY(),
+                    pPos.getZ(),
+                    stack
+            );
+            pLevel.addFreshEntity(entity);
+        }
     }
 
     @Override
