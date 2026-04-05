@@ -54,11 +54,10 @@ public class AlloySmelterMenu extends AbstractMachineMenu<AlloySmelterBlockEntit
         return data.get(0) > 0;
     }
 
-    public int getScaledProgress() {
+    public int getScaledProgress(int size) {
         int progress = data.get(0);
         int max_progress = data.get(1);
-        int arrow_size = 14;
 
-        return max_progress != 0 && progress != 0 ? progress * arrow_size / max_progress : 0;
+        return (max_progress != 0 && progress != 0) ? (progress * size / max_progress) : 0;
     }
 }

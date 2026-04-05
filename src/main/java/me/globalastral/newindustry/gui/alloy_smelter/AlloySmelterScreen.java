@@ -27,12 +27,9 @@ public class AlloySmelterScreen extends AbstractMachineScreen<AlloySmelterMenu> 
 
     @Override
     protected void renderAfterBG(GuiGraphics pGuiGraphics, int x, int y, float pPartialTick, int pMouseX, int pMouseY) {
-        renderProgressArrow(pGuiGraphics, x, y);
-    }
-
-    private void renderProgressArrow(GuiGraphics guiGraphics, int x, int y) {
         if(menu.isCrafting()) {
-            guiGraphics.blit(TEXTURE, x + 81, y + 19, 176, 0, 14, menu.getScaledProgress());
+            pGuiGraphics.blit(TEXTURE, x + 81, y + 19, 176, 0, 14, 14 - menu.getScaledProgress(14));
+            pGuiGraphics.blit(TEXTURE, x + 73, y + 35, 176, 15, 28, menu.getScaledProgress(17));
         }
     }
 }
