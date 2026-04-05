@@ -19,7 +19,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class AbstractMachineBlockEntity extends BlockEntity {
-
     public abstract int getSlotAmount();
     public abstract int getInContainerData(int index);
     public abstract void setInContainerData(int index, int value);
@@ -34,7 +33,12 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity {
 
     private ItemStackHandler getItemHandler() {
         if (itemHandler == null)
-            itemHandler = new ItemStackHandler(getSlotAmount());
+            itemHandler = new ItemStackHandler(getSlotAmount()) {
+                @Override
+                protected void onContentsChanged(int slot) {
+                    setChanged();
+                }
+            };
         return itemHandler;
     }
 
