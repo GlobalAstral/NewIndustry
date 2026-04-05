@@ -3,7 +3,10 @@ package me.globalastral.newindustry;
 import com.mojang.logging.LogUtils;
 import me.globalastral.newindustry.blockentities.ModBlockEntities;
 import me.globalastral.newindustry.blocks.ModBlocks;
+import me.globalastral.newindustry.gui.ModMenuTypes;
+import me.globalastral.newindustry.gui.alloy_smelter.AlloySmelterScreen;
 import me.globalastral.newindustry.items.ModItems;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -42,6 +45,7 @@ public class NewIndustry {
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModBlockEntities.register(modEventBus);
+        ModMenuTypes.register(modEventBus);
 
         CREATIVE_MODE_TABS.register(modEventBus);
 
@@ -61,7 +65,7 @@ public class NewIndustry {
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-
+            MenuScreens.register(ModMenuTypes.ALLOY_SMELTER_MENU.get(), AlloySmelterScreen::new);
         }
     }
 }

@@ -2,16 +2,26 @@ package me.globalastral.newindustry.blocks.custom;
 
 import me.globalastral.newindustry.blockentities.ModBlockEntities;
 import me.globalastral.newindustry.blockentities.custom.AlloySmelterBlockEntity;
+import me.globalastral.newindustry.blocks.AbstractMachineBlock;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
 public class AlloySmelterBlock extends AbstractMachineBlock<AlloySmelterBlockEntity> {
@@ -25,6 +35,25 @@ public class AlloySmelterBlock extends AbstractMachineBlock<AlloySmelterBlockEnt
 
     public AlloySmelterBlock(Properties pProperties) {
         super(pProperties);
+    }
+
+    @Override
+    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
+        if (pLevel.isClientSide())
+            return InteractionResult.PASS;
+
+        ItemStack stack = pPlayer.getItemInHand(pHand);
+
+        if (!pState.getValue(HAS_PORTS) && stack.is(Items.IRON_INGOT)) {
+            stack.shrink(1);
+            pLevel.setBlock(pPos, pState.setValue(HAS_PORTS, true), 11);
+        } else if (pState.getValue(HAS_PORTS) && pLevel.getBlockEntity(pPos) instanceof AlloySmelterBlockEntity entity) {
+            NetworkHooks.openScreen((ServerPlayer) pPlayer, entity, pPos);
+        } else {
+            return InteractionResult.PASS;
+        }
+
+        return InteractionResult.PASS;
     }
 
     @Override

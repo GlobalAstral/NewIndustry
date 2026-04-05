@@ -1,16 +1,24 @@
 package me.globalastral.newindustry.blockentities.custom;
 
+import me.globalastral.newindustry.blockentities.AbstractMachineBlockEntity;
 import me.globalastral.newindustry.blockentities.ModBlockEntities;
+import me.globalastral.newindustry.gui.alloy_smelter.AlloySmelterMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-//TODO FAI INTERFACCIA PER AIUTI SU PROGRESS E MAX PROGRESS SE SERVE
-public class AlloySmelterBlockEntity extends AbstractMachineBlockEntity {
+import org.jetbrains.annotations.Nullable;
 
-    private static final int INPUT_SLOT1 = 0;
-    private static final int INPUT_SLOT2 = 1;
-    private static final int OUTPUT_SLOT = 2;
+public class AlloySmelterBlockEntity extends AbstractMachineBlockEntity implements MenuProvider {
+
+    public static final int INPUT_SLOT1 = 0;
+    public static final int INPUT_SLOT2 = 1;
+    public static final int OUTPUT_SLOT = 2;
 
     private int progress = 0;
     private int max_progress;
@@ -61,5 +69,16 @@ public class AlloySmelterBlockEntity extends AbstractMachineBlockEntity {
     @Override
     public void tick(Level level, BlockPos pos, BlockState state) {
 
+    }
+
+    @Override
+    public Component getDisplayName() {
+        return Component.translatable("gui.newindustry.alloy_smelter_title");
+    }
+
+    @Nullable
+    @Override
+    public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
+        return new AlloySmelterMenu(pContainerId, pPlayerInventory, this, this.data);
     }
 }

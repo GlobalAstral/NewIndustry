@@ -4,5 +4,6 @@
   "item.newindustry.refined_steel_ingot": "Steel Ingot",
   "item.newindustry.industrial_steel_ingot": "Steel Ingot",
   "item.newindustry.coal_coke": "Coal Coke",
-  "block.newindustry.alloy_smelter": "Alloy Smelter"
+  "block.newindustry.alloy_smelter": "Alloy Smelter",
+  "gui.newindustry.alloy_smelter_title": "Alloy Smelter"
 }
