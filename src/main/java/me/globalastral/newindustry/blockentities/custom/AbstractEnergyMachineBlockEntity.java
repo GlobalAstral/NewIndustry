@@ -15,11 +15,11 @@ import org.jetbrains.annotations.Nullable;
 
 public abstract class AbstractEnergyMachineBlockEntity extends AbstractMachineBlockEntity {
 
-    public abstract int get_capacity();
-    public abstract int get_max_transfer();
+    protected abstract int get_capacity();
+    protected abstract int get_max_transfer();
 
-    private CustomEnergyStorage energyStorage;
-    private CustomEnergyStorage getEnergyStorage() {
+    protected CustomEnergyStorage energyStorage;
+    protected CustomEnergyStorage getEnergyStorage() {
         if (energyStorage == null) {
             energyStorage = new CustomEnergyStorage(get_capacity(), get_max_transfer()) {
                 @Override
@@ -30,7 +30,7 @@ public abstract class AbstractEnergyMachineBlockEntity extends AbstractMachineBl
         }
         return energyStorage;
     }
-    private LazyOptional<IEnergyStorage> lazyEnergyStorage = LazyOptional.empty();
+    protected LazyOptional<IEnergyStorage> lazyEnergyStorage = LazyOptional.empty();
 
     public AbstractEnergyMachineBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
         super(pType, pPos, pBlockState);

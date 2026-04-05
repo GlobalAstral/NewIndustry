@@ -19,19 +19,19 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class AbstractMachineBlockEntity extends BlockEntity {
-    public abstract int getSlotAmount();
-    public abstract int getInContainerData(int index);
-    public abstract void setInContainerData(int index, int value);
-    public abstract int containerDataCount();
-    public abstract void writeNBT(CompoundTag nbt);
-    public abstract void readNBT(CompoundTag nbt);
+    protected abstract int getSlotAmount();
+    protected abstract int getInContainerData(int index);
+    protected abstract void setInContainerData(int index, int value);
+    protected abstract int containerDataCount();
+    protected abstract void writeNBT(CompoundTag nbt);
+    protected abstract void readNBT(CompoundTag nbt);
     public abstract void tick(Level level, BlockPos pos, BlockState state);
 
-    private ItemStackHandler itemHandler;
-    private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
+    protected ItemStackHandler itemHandler;
+    protected LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
     protected final ContainerData data;
 
-    private ItemStackHandler getItemHandler() {
+    protected ItemStackHandler getItemHandler() {
         if (itemHandler == null)
             itemHandler = new ItemStackHandler(getSlotAmount()) {
                 @Override
