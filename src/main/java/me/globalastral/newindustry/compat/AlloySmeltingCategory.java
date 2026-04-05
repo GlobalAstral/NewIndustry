@@ -45,6 +45,7 @@ public class AlloySmeltingCategory implements IRecipeCategory<AlloySmeltingRecip
         return Component.translatable("gui.newindustry.alloy_smelter_title");
     }
 
+    @SuppressWarnings("for removal")
     @Nullable
     @Override
     public IDrawable getBackground() {
