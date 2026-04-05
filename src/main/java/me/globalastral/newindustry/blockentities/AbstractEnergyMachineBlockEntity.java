@@ -1,4 +1,4 @@
-package me.globalastral.newindustry.blockentities.custom;
+package me.globalastral.newindustry.blockentities;
 
 import me.globalastral.newindustry.utils.CustomEnergyStorage;
 import net.minecraft.core.BlockPos;

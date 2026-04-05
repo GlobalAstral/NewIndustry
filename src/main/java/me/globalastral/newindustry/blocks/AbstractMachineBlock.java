@@ -1,6 +1,6 @@
-package me.globalastral.newindustry.blocks.custom;
+package me.globalastral.newindustry.blocks;
 
-import me.globalastral.newindustry.blockentities.custom.AbstractMachineBlockEntity;
+import me.globalastral.newindustry.blockentities.AbstractMachineBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;

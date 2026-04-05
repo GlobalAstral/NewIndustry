@@ -1,4 +1,4 @@
-package me.globalastral.newindustry.blockentities.custom;
+package me.globalastral.newindustry.blockentities;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
