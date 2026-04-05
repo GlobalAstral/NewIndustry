@@ -6,12 +6,11 @@ import me.globalastral.newindustry.blocks.ModBlocks;
 import me.globalastral.newindustry.gui.ModMenuTypes;
 import me.globalastral.newindustry.gui.alloy_smelter.AlloySmelterScreen;
 import me.globalastral.newindustry.items.ModItems;
+import me.globalastral.newindustry.recipe.ModRecipes;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -28,7 +27,7 @@ import org.slf4j.Logger;
 @Mod(NewIndustry.MODID)
 public class NewIndustry {
     public static final String MODID = "newindustry";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
@@ -46,6 +45,7 @@ public class NewIndustry {
         ModBlocks.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         ModMenuTypes.register(modEventBus);
+        ModRecipes.register(modEventBus);
 
         CREATIVE_MODE_TABS.register(modEventBus);
 
