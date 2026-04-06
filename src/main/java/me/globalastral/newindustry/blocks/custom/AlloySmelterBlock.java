@@ -46,7 +46,8 @@ public class AlloySmelterBlock extends AbstractMachineBlock<AlloySmelterBlockEnt
         ItemStack stack = pPlayer.getItemInHand(pHand);
 
         if (!pState.getValue(HAS_PORTS) && stack.is(Items.IRON_INGOT)) {
-            stack.shrink(1);
+            if (!pPlayer.isCreative())
+                stack.shrink(1);
             pLevel.setBlock(pPos, pState.setValue(HAS_PORTS, true), 11);
             return InteractionResult.SUCCESS;
         } else if (pState.getValue(HAS_PORTS) && pLevel.getBlockEntity(pPos) instanceof AlloySmelterBlockEntity entity) {
@@ -59,7 +60,7 @@ public class AlloySmelterBlock extends AbstractMachineBlock<AlloySmelterBlockEnt
     @Override
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
         super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
-        if (pState.getValue(HAS_PORTS)) {
+        if (pState.getBlock() != pNewState.getBlock() && pState.getValue(HAS_PORTS)) {
             ItemStack stack = new ItemStack(Items.IRON_INGOT, 1);
             ItemEntity entity = new ItemEntity(
                     pLevel,

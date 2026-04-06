@@ -2,6 +2,7 @@ package me.globalastral.newindustry.blockentities.custom;
 
 import me.globalastral.newindustry.blockentities.AbstractMachineBlockEntity;
 import me.globalastral.newindustry.blockentities.ModBlockEntities;
+import me.globalastral.newindustry.blocks.custom.AlloySmelterBlock;
 import me.globalastral.newindustry.gui.alloy_smelter.AlloySmelterMenu;
 import me.globalastral.newindustry.recipe.AlloySmeltingRecipe;
 import net.minecraft.core.BlockPos;
@@ -82,6 +83,11 @@ public class AlloySmelterBlockEntity extends AbstractMachineBlockEntity implemen
         if (recipe == null) {
             resetProgress();
             return;
+        }
+        if (progress > 0 && !state.getValue(AlloySmelterBlock.LIT)) {
+            level.setBlock(pos, state.setValue(AlloySmelterBlock.LIT, true), 2);
+        } else if (progress == 0 && state.getValue(AlloySmelterBlock.LIT)) {
+            level.setBlock(pos, state.setValue(AlloySmelterBlock.LIT, false), 2);
         }
         incrementProgress();
         setChanged(level, pos, state);
