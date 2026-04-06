@@ -1,7 +1,7 @@
 {
   "type": "minecraft:blasting",
   "category": "misc",
-  "cookingtime": 180,
+  "cookingtime": 250,
   "experience": 0.1,
   "group": "cokeables",
   "ingredient": {
